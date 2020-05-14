@@ -1,6 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 # Create your views here.
-def index(request):
-    return HttpResponse("<em> My Second App</em>")
+
+class HelloApiView(APIView):
+    """Test API View."""
+
+    def get(self, request, format=None):
+        """Retuns a list of APIView features."""
+
+        an_apiview = [
+            'Uses HTTP methods as function (get, post, patch, put delete)',
+            'It is similar to a traditional Django view',
+            'Gives you the most control over your logic',
+            'Is mapped manually to URLs'
+        ]
+
+        return Response({'message': 'Hello!', 'an_apiview': an_apiview})
+
