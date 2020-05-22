@@ -3,35 +3,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>Article List</title>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="{% static 'styles.css'%}">
 </head>
-<body>
-    <header class="wrapper">
-        <h1><a href="{% url 'home' %}"><img src="{% static 'CynoBlog.png' %}" alt=""></a></h1>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                <li>
-                    <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Logout</button>
-                    </form>
-                    <li><a href="{% url 'articles:create' %}" class="highlight">Create new article</a></li>
-                    <li><a href="{% url 'articles:upload' %}" class="highlight">Import CSV articles</a></li>
-                </li>
-                {% else %}
-                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
-                    <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <div class="wrapper">    
-        {% block content %}
-        {% endblock %}
+<div class="vid-container">
+    <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
+        <source src="https://vod-progressive.akamaized.net/exp=1590131180~acl=%2A%2F1721261846.mp4%2A~hmac=fde0ceff891bcec3b156c925086155db0c8f4b4b141f362e40c56d1e96417ed2/vimeo-prod-skyfire-std-us/01/535/16/402679728/1721261846.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <body>
+            <header>
+                <h1><a href="{% url 'home' %}"><img src="{% static 'CynoBlog.png' %}" alt=""></a></h1>
+                <nav>
+                    <ul>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Logout</button>
+                            </form>
+                            <li><a href="{% url 'articles:create' %}" class="highlight">Create new article</a></li>
+                            <li><a href="{% url 'articles:upload' %}" class="highlight">Import CSV articles</a></li>
+                        </li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                            <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </header>
+            <div class="wrapper">    
+                {% block content %}
+                {% endblock %}
+            </div>
+        </body>
     </div>
-</body>
+</div>
 </html>

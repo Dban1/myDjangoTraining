@@ -1,52 +1,53 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class='article-detail'>
-    <div class='article'>
-        <h2>{{ article.title }}</h2>
-        {% if request.user == article.author %}
-        <span class=" text-muted font-weight-normal ">
-            <a href="{% url 'articles:delete' id=article.id %}">Delete Article</a>
-        </span>
-        {% endif %}
-        <p>{{ article.desc }}</p>
-        <p>{{ article.date }} by {{ article.author }}</p>
-    </div>
-</div>
-{% for comment in comments %}
-    <div class="comments" style="padding: 10px;">
-        <p class="font-weight-bold">
-            {{ comment.author }}
+<div class="box-article-list">
+    <div class='article-detail'>
+        <div class='article'>
+            <h2>{{ article.title }}</h2>
+            {% if request.user == article.author %}
             <span class=" text-muted font-weight-normal ">
-                {{ comment.date }}
+                <a href="{% url 'articles:delete' id=article.id %}">Delete Article</a>
             </span>
-            {% if request.user == comment.author and user.is_authenticated %}
-                <span class=" text-muted font-weight-normal ">
-                    <a href="{% url 'comments:edit' id=comment.id %}">Edit</a>
-                </span>
-                <span class=" text-muted font-weight-normal ">
-                    <a href="{% url 'comments:delete' id=comment.id %}">Delete</a>
-                </span>
             {% endif %}
-        </p>
-        {{ comment.body | linebreaks }}
+            <p>{{ article.desc }}</p>
+            <p>{{ article.date }} by {{ article.author }}</p>
+        </div>
     </div>
-{% endfor %}
-{% if user.is_authenticated %}
-    <div class="card-body">
-        {% if article.is_max_comments %}
-            <h3>This article has reached maximum comments.</h3>
-        {% else %}
-            <h3>Leave a comment</h3>
-            <form method="post" style="margin-top: 1.3em;">
-                {{ comment_form.as_p }}
-                {% csrf_token %}
-                <input type="submit" name="action" value="new_comment">
-            </form>
-        {% endif %}
-    </div>
-{% else %}
-    <h3>Login to comment!</h3>
-{% endif %}
-
+    {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+                {{ comment.author }}
+                <span class=" text-muted font-weight-normal ">
+                    {{ comment.date }}
+                </span>
+                {% if request.user == comment.author and user.is_authenticated %}
+                    <span class=" text-muted font-weight-normal ">
+                        <a href="{% url 'comments:edit' id=comment.id %}">Edit</a>
+                    </span>
+                    <span class=" text-muted font-weight-normal ">
+                        <a href="{% url 'comments:delete' id=comment.id %}">Delete</a>
+                    </span>
+                {% endif %}
+            </p>
+            {{ comment.body | linebreaks }}
+        </div>
+    {% endfor %}
+    {% if user.is_authenticated %}
+        <div class="card-body">
+            {% if article.is_max_comments %}
+                <h3>This article has reached maximum comments.</h3>
+            {% else %}
+                <h3>Leave a comment</h3>
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ comment_form.as_p }}
+                    {% csrf_token %}
+                    <input type="submit" name="action" value="new_comment">
+                </form>
+            {% endif %}
+        </div>
+    {% else %}
+        <h3>Login to comment!</h3>
+    {% endif %}
+</div>
 {% endblock %}

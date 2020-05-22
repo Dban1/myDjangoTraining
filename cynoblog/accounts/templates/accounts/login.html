@@ -1,7 +1,7 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h1>Login</h1>
+    <!-- <h1>Login</h1>
     <form class='site-form' method='post'>
         {% csrf_token %}
         {{ form }}
@@ -9,5 +9,23 @@
             <input type="hidden" name="next" value="{{ request.GET.next }}">
         {% endif %}
         <input type="submit" value="Login">
-    </form>
+    </form> -->
+
+      <div class="vid-container">
+        <div class="inner-container">
+          <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop>
+            <source src="https://vod-progressive.akamaized.net/exp=1590131180~acl=%2A%2F1721261846.mp4%2A~hmac=fde0ceff891bcec3b156c925086155db0c8f4b4b141f362e40c56d1e96417ed2/vimeo-prod-skyfire-std-us/01/535/16/402679728/1721261846.mp4" type="video/mp4">
+          </video>
+          <div class="box">
+            <form class='site-form' method='post'>
+                {% csrf_token %}
+                {{ form }}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+                <input type="submit" value="Login">
+            </form>
+          </div>
+        </div>
+      </div>
 {% endblock %}

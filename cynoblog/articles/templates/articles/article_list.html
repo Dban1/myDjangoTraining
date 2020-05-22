@@ -1,14 +1,18 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h1 style="text-align: center;"">Articles List</h1>
-    <div class='articles'>
-        {% for article in articles %}
-            <div class='article'>
-                <h2><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.snippet_title }}</a></h2>
-                <p>{{ article.snippet_desc }}</p>
-                <p>{{ article.date }}</p>
-            </div>
-        {% endfor %}
+<div class="vid-container">
+    <div class="box-article-list">
+        <h1 style="text-align: center;"">Articles List</h1>
+        <div class='articles'>
+            {% for article in articles %}
+                <div class='article'>
+                    <h2><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.snippet_title }}</a></h2>
+                    <p>{{ article.snippet_desc }}</p>
+                    <p>{{ article.date }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
+</div>
 {% endblock %}
