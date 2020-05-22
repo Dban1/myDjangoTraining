@@ -1,0 +1,13 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <div class="edit-comment">
+        <h2>Edit your comment:</h2>
+        <p>{{ original_body }}</p>
+        <form class="site-form" action="{% url 'comments:edit' id=comment.id%}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+{% endblock %}

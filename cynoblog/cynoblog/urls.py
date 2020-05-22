@@ -15,14 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import include
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 
 from . import views
+from articles import views as article_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
+    path('', article_views.article_list, name="home"),
     path('about/', views.about),
 
-    path('articles/', include('articles.urls')) #looks at article url when user visits ../articles
+    path('articles/', include('articles.urls')), #looks at article url when user visits ../articles
+    path('accounts/', include('accounts.urls')),
+    path('comments/', include('comments.urls')),
 ]
+
+urlpatterns += staticfiles_urlpatterns()  #appends to urlpatterns if in debug mode

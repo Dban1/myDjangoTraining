@@ -1,0 +1,12 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <div class="upload-articles">
+        <h2>Upload a file for articles</h2>
+        <form class="site-form" action="{% url 'articles:upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+{% endblock %}

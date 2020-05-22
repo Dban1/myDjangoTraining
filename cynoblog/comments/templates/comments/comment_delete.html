@@ -1,0 +1,13 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <div class="delete-comment">
+        <h2>Delete your comment?</h2>
+        <p>{{ original_body }}</p>
+        <form class="site-form" action="{% url 'comments:delete' id=comment.id%}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Confirm" name="delete">
+            <input type="submit" value="Cancel" name="delete">
+        </form>
+    </div>
+{% endblock %}

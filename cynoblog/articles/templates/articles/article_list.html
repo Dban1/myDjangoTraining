@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Article List</title>
-</head>
-<body>
+{% extends 'base_layout.html' %}
+
+{% block content %}
     <h1 style="text-align: center;"">Articles List</h1>
-    <p style="color: red; text-align: center;">(list of articles go here)</p>
-</body>
-</html>
+    <div class='articles'>
+        {% for article in articles %}
+            <div class='article'>
+                <h2><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.snippet_title }}</a></h2>
+                <p>{{ article.snippet_desc }}</p>
+                <p>{{ article.date }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

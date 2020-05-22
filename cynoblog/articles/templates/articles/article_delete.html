@@ -1,0 +1,13 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <div class="delete-article">
+        <h2>Delete your article?</h2>
+        <p>{{ original_body }}</p>
+        <form class="site-form" action="{% url 'articles:delete' id=article.id%}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Confirm" name="delete">
+            <input type="submit" value="Cancel" name="delete">
+        </form>
+    </div>
+{% endblock %}
