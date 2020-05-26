@@ -9,9 +9,10 @@ import re
 
 class Article(models.Model):
 
-    title_validator = RegexValidator(r'(?=(^(.*?[\w \d \s].*?){50,}$))(?=(^.{1,200}$))',
-                                        message="Article cannot be longer than 200 characters and cannot have more than 150 symbols.")
-    title = models.CharField(max_length=200, validators=[title_validator,],)
+    # title_validator = RegexValidator(r'(?=(^(.*?[\w \d \s].*?){50,}$))(?=(^.{1,200}$))',
+    #                                     message="Article cannot be longer than 200 characters and cannot have more than 150 symbols.")
+    # title = models.CharField(max_length=200, validators=[title_validator,],)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(default='', editable=False)
     desc = models.TextField()
     date = models.DateTimeField(auto_now_add=True)

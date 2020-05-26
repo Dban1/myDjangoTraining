@@ -82,7 +82,7 @@ body{
     width:800;
     height:800px;
     position:absolute;
-    overflow:hidden;
+    overflow:scroll;
     background:rgba(0,0,0,0.33);
   }
   bgvid-inner-main{
@@ -99,7 +99,7 @@ body{
   .vid-container{
     position:relative;
     height:100vh;
-    overflow:hidden;
+    overflow:scroll;
   }
   .bgvid{
     position:absolute;
@@ -115,7 +115,7 @@ body{
     position:absolute;
     top:calc(10vh);
     left:calc(50vw - 250px);
-    overflow:hidden;
+    overflow:scroll;
   }
   .bgvid.inner{
     top:calc(10vh);
