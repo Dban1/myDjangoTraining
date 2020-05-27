@@ -5,11 +5,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 from .serializers import ArticleSerializer
 
 from .models import Article
 from .import forms
 from comments.forms import CommentForm
+from comments.serializers import CommentSerializer
 
 import xlrd
 
@@ -20,6 +24,13 @@ IMPORT_FILE_TYPES = ['.xlsx', '.csv']
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset= Article.objects.all().order_by('-date')
     serializer_class = ArticleSerializer
+
+    @action(detail=True)
+    def comments(self, request, *args, **kwargs):
+        comment_list = Article.objects.get(pk=kwargs.get('pk')).comments.all()
+        comment_serializer = CommentSerializer(comment_list, many=True)
+        # json = JSONRenderer().render(comment_serializer.data)
+        return Response(comment_serializer.data)
 
 
 # def article_list(request):
