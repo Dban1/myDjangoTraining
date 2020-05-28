@@ -25,7 +25,9 @@ SECRET_KEY = '$i=-va6p!mi0sww*$5%(4bnhqx%vy8(9l=e6!gjq*-j_$@epw#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.99.100',
+]
 
 
 # Application definition
@@ -88,6 +90,16 @@ WSGI_APPLICATION = 'cynoblog.wsgi.application'
 # }
 
 DATABASES = {
+    # DOCKER
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'postgres',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': 'db',
+    #     'PORT': '5432',
+    # }
+    # LOCALHOST
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cynoblogbase',
