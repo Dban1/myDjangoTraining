@@ -17,7 +17,7 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from . import views
 from articles import views as article_views
 
@@ -28,6 +28,9 @@ urlpatterns = [
     path('', include('articles.urls')), #looks at article url when user visits ../articles
     path('accounts/', include('accounts.urls')),
     path('comments/', include('comments.urls')),
+
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view())
 ]
 
 urlpatterns += staticfiles_urlpatterns()  #appends to urlpatterns if in debug mode
